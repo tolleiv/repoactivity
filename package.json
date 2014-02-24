@@ -1,0 +1,14 @@
+{
+    "name": "repoactivity",
+    "version":"0.0.1",
+    "private":true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies":  {
+        "express": "3.x",
+        "request": "> 0.0.1",
+        "jasmine-node":  ">= 0.0.1",
+        "async": ">=0.0.3"
+    }
+}
