@@ -1,0 +1,79 @@
+{
+    "ref": "refs/heads/master",
+    "after": "424e65fa86e82867a49af6629d5dabb90e86ca64",
+    "before": "ea9bf13772e3287b6b4a6c497b1fed003bdc8fed",
+    "created": false,
+    "deleted": false,
+    "forced": false,
+    "compare": "https://github.com/tolleiv/repoactivity/compare/ea9bf13772e3...424e65fa86e8",
+    "commits": [
+        {
+            "id": "424e65fa86e82867a49af6629d5dabb90e86ca64",
+            "distinct": true,
+            "message": "Add basic spec test",
+            "timestamp": "2014-02-24T15:22:10-08:00",
+            "url": "https://github.com/tolleiv/repoactivity/commit/424e65fa86e82867a49af6629d5dabb90e86ca64",
+            "author": {
+                "name": "Tolleiv Nietsch",
+                "email": "info@tolleiv.de",
+                "username": "tolleiv"
+            },
+            "committer": {
+                "name": "Tolleiv Nietsch",
+                "email": "info@tolleiv.de",
+                "username": "tolleiv"
+            },
+            "added": ["spec/a-spec.js", "spec/fixtures/single-commit.json"],
+            "removed": [],
+            "modified": []
+        }
+    ],
+    "head_commit": {
+        "id": "424e65fa86e82867a49af6629d5dabb90e86ca64",
+        "distinct": true,
+        "message": "Add basic spec test",
+        "timestamp": "2014-02-24T15:22:10-08:00",
+        "url": "https://github.com/tolleiv/repoactivity/commit/424e65fa86e82867a49af6629d5dabb90e86ca64",
+        "author": {
+            "name": "Tolleiv Nietsch",
+            "email": "info@tolleiv.de",
+            "username": "tolleiv"
+        },
+        "committer": {
+            "name": "Tolleiv Nietsch",
+            "email": "info@tolleiv.de",
+            "username": "tolleiv"
+        },
+        "added": ["spec/a-spec.js", "spec/fixtures/single-commit.json"],
+        "removed": [],
+        "modified": []
+    },
+    "repository": {
+        "id": 17153958,
+        "name": "repoactivity",
+        "url": "https://github.com/tolleiv/repoactivity",
+        "description": "A demo repo",
+        "watchers": 0,
+        "stargazers": 0,
+        "forks": 0,
+        "fork": false,
+        "size": 0,
+        "owner": {
+            "name": "tolleiv",
+            "email": "github@tolleiv.de"
+        },
+        "private": false,
+        "open_issues": 0,
+        "has_issues": true,
+        "has_downloads": true,
+        "has_wiki": true,
+        "language": "JavaScript",
+        "created_at": 1393282714,
+        "pushed_at": 1393284140,
+        "master_branch": "master"
+    },
+    "pusher": {
+        "name": "tolleiv",
+        "email": "github@tolleiv.de"
+    }
+}
