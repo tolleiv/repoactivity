@@ -1,4 +1,9 @@
 {
+    "travis": {
+        "core": "collection1",
+        "path": "/solr",
+        "port": 8983
+    },
     "test": {
         "core": "test",
         "path": "/solr",

@@ -13,7 +13,10 @@ results
 
 .idea
 
-res/*
+res/jetty*
+res/solr-*
+
+res/solrdata/*/data/*
 
 npm-debug.log
 node_modules

@@ -1,15 +1,14 @@
 var helper = require('./spec-helper');
 var async = require('async');
-var solr = require('../lib/solr')('test')
+var solr = require('../lib/solr')(process.env.TRAVIS_BUILD_ID ? 'travis' : 'test')
 var canConnect = false;
 
 describe("The Solr indexer", function () {
-    /*
-     afterEach(function() {
-     runs(helper.clearIndex(solr));
-     waitsFor(helper.indexCleared);
-     });
-     */
+
+    afterEach(function () {
+        runs(helper.clearIndex(solr));
+        waitsFor(helper.indexCleared);
+    });
     it("can connect to a Solr server", function (done) {
         solr.ping(function (err, doc) {
             expect(err).toBeNull();
