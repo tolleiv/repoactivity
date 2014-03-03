@@ -6,7 +6,7 @@
         "start": "node app"
     },
     "dependencies":  {
-        "jake": "> 0.0.1",
+        "solr-client":">= 0.0.1",
         "express": "3.x",
         "request": "> 0.0.1",
         "jasmine-node":  ">= 0.0.1",

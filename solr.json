@@ -1,0 +1,12 @@
+{
+    "test": {
+        "core": "test",
+        "path": "/solr",
+        "port": 8080
+    },
+    "development": {
+        "core": "development",
+        "path": "/solr",
+        "port": 8080
+    }
+}

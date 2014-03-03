@@ -4,7 +4,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 
-var server, app, started = false, fixturesOk = false;
+var server, app, loadFixture, started = false, fixturesOk = 0, fixtureReq=0, indexCleared=false;
 exports.req = {
     get: function (path, callback) {
         return request("http://127.0.0.1:3001" + path, callback);
@@ -62,18 +62,53 @@ var startServer = function (env, indexer) {
         });
 };
 
-exports.loadFixture = function (name, cb) {
-    return function () {
-        fixturesOk = false
+exports.loadFixture = loadFixture = function (name, cb) {
+    return function (n) {
+        fixturesOk = 0;
+        fixtureReq = n || 1;
         fs.readFile('./spec/fixtures/' + name + '.json', 'utf-8', function (err, data) {
+            expect(err).toBeNull();
             cb(JSON.parse(data));
-            fixturesOk = true;
+            fixturesOk++;
         });
     }
 };
-exports.fixtureOk = function () {
-    return true;
+exports.commitFixtures = function(solr, list) {
+    return function () {
+        fixturesOk = 0;
+        fixtureReq = 3*list.length;
+        list.forEach(function(entry) {
+            loadFixture(entry, function(data) {
+                solr.addRepository(data.repository, function(err) {
+                    expect(err).toBeNull();
+                    fixturesOk++;
+                });
+                data.commits['0'].repository_id = data.repository.id;
+                solr.addCommit(data.commits['0'], function(err) {
+                    expect(err).toBeNull();
+                    fixturesOk++;
+                });
+            })(fixtureReq);
+        })
+    }
 };
+
+exports.fixtureOk = function () {
+    return fixturesOk == fixtureReq;
+};
+
+exports.clearIndex = function(solr) {
+    return function() {
+        indexCleared=false;
+        solr.clearAll(function() {
+            indexCleared=true;
+        });
+    }
+};
+exports.indexCleared = function() {
+    return indexCleared;
+}
+
 
 exports.start = function (indexer) {
     return function () {
