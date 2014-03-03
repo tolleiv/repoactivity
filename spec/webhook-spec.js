@@ -2,13 +2,11 @@ var helper = require('./spec-helper');
 var events = require('events');
 
 describe("The webhook API", function () {
-    var request = helper.req;
+    var fixture, request = helper.req;
     var indexer = new events.EventEmitter();
-    var fixture;
-    var respondsPositive = helper.req.respondsPositive
-    var respondsNegative = helper.req.respondsNegative
+
     beforeEach(function () {
-        runs(helper.loadFixture('single-commit', function (data) {
+        runs(helper.loadFixture('fixture01', function (data) {
             fixture = data;
         }));
         waitsFor(helper.fixtureOk);
@@ -20,9 +18,7 @@ describe("The webhook API", function () {
     });
 
     it("can retrieve JSON", function (done) {
-        request.post("/payload", {demo: 'tolleiv'}, respondsPositive(function (body) {
-            done();
-        }));
+        request.post("/payload", {demo: 'tolleiv'}, helper.req.httpOk(done));
     });
 
     it("emits all commits for indexing", function (done) {
@@ -33,10 +29,7 @@ describe("The webhook API", function () {
             expect(typeof repo).toBe('number');
             done();
         });
-        request.post("/payload", fixture, respondsPositive(function (body) {
-            expect(body).toBeDefined();
-        }));
-
+        request.post("/payload", fixture, helper.req.httpOk());
     });
 
     it("emits contained repository information for indexing", function(done) {
@@ -45,9 +38,6 @@ describe("The webhook API", function () {
             expect(data.url).not.toBeNull();
             done();
         });
-        request.post("/payload", fixture, respondsPositive(function (body) {
-            expect(body).toBeDefined();
-        }));
-    })
-
+        request.post("/payload", fixture, helper.req.httpOk());
+    });
 });

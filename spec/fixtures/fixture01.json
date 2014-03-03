@@ -23,7 +23,7 @@
                 "email": "info@tolleiv.de",
                 "username": "tolleiv"
             },
-            "added": ["spec/a-spec.js", "spec/fixtures/single-commit.json"],
+            "added": ["spec/a-spec.js", "spec/fixtures/fixture01.json"],
             "removed": [],
             "modified": []
         }
@@ -44,7 +44,7 @@
             "email": "info@tolleiv.de",
             "username": "tolleiv"
         },
-        "added": ["spec/a-spec.js", "spec/fixtures/single-commit.json"],
+        "added": ["spec/a-spec.js", "spec/fixtures/fixture01.json"],
         "removed": [],
         "modified": []
     },

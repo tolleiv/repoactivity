@@ -2,6 +2,7 @@ var async = require('async')
 
 module.exports = function (app) {
     app.post("/payload", function (req, res) {
+        //console.log(req.body)
         if (typeof req.body.commits == 'object') {
             var keys = Object.keys(req.body.commits);
             async.each(keys,
