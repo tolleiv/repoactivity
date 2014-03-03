@@ -84,7 +84,7 @@ describe("The Solr indexer", function () {
             solr.findRepositories(function (err, docs) {
                 expect(err).toBeNull();
                 expect(docs.length).toBe(2);
-                expect(docs[0].type).toBe('repository')
+                expect(docs['0'].type).toBe('repository')
                 done();
             });
         });
