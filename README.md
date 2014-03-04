@@ -8,6 +8,12 @@ Running the application
 
 Make sure you've a Apache Solr core running and you've the right settings in the related solr.json. Once applied, just trigger the application with `node app.js`.
 
+Build status
+------------
+
+[![Build Status](https://travis-ci.org/tolleiv/repoactivity.png?branch=master)](https://travis-ci.org/tolleiv/repoactivity)
+
+
 License
 -------
 

@@ -7,7 +7,7 @@
         "test": "jasmine-node --verbose --color --captureExceptions spec"
     },
     "dependencies":  {
-        "solr-client":">= 0.0.1",
+        "solr-client":"https://github.com/tolleiv/solr-node-client.git",
         "express": "3.x",
         "request": "> 0.0.1",
         "jasmine-node":  ">= 0.0.1",

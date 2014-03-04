@@ -1,7 +1,6 @@
 var helper = require('./spec-helper');
 var async = require('async');
 var solr = require('../lib/solr')(process.env.TRAVIS_BUILD_ID ? 'travis' : 'test')
-console.log("Running on " + (process.env.TRAVIS_BUILD_ID ? 'travis' : 'test'))
 
 describe("The Solr indexer", function () {
 
@@ -84,8 +83,7 @@ describe("The Solr indexer", function () {
             solr.findRepositories(function (err, docs) {
                 expect(err).toBeNull();
                 expect(docs.length).toBe(2);
-                console.log(docs)
-                //expect(docs['0'].type).toBe('repository')
+                expect(docs['0'].type).toBe('repository')
                 done();
             });
         });
@@ -100,7 +98,7 @@ describe("The Solr indexer", function () {
             solr.findCommits(function (err, docs) {
                 expect(err).toBeNull();
                 expect(docs.length).toBe(2);
-                //expect(docs[0].type).toBe('commit')
+                expect(docs[0].type).toBe('commit')
                 done();
             })
         });
