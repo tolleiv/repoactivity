@@ -15,6 +15,7 @@ results
 
 res/jetty*
 res/solr-*
+solr-*
 
 res/solrdata/*/data/*
 
