@@ -131,6 +131,7 @@ describe("The Solr indexer", function () {
                     solr.findRepositoryById(17153958, function(err, repo) {
                         expect(repo.hasOwnProperty('forks_url')).toBeFalsy();
                         expect(repo.hasOwnProperty('owner_email')).toBeTruthy();
+                        expect(repo.forks).toBe(0)
                         cb(err);
                     });
                 },
@@ -141,6 +142,7 @@ describe("The Solr indexer", function () {
                     solr.findRepositoryById(17153958, function(err, repo) {
                         expect(repo.hasOwnProperty('forks_url')).toBeTruthy();
                         expect(repo.hasOwnProperty('owner_email')).toBeTruthy();
+                        expect(repo.forks).toBe(1)
                         cb(err);
                     });
                 }
