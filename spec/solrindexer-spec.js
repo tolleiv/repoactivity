@@ -19,7 +19,7 @@ describe("The Solr indexer", function () {
     describe("clients connected to an empty index", function () {
         var fixture;
         beforeEach(function () {
-            runs(helper.loadFixture('fixture01', function (data) {
+            runs(helper.loadFixture('push01', function (data) {
                 fixture = data;
             }));
             waitsFor(helper.fixtureOk);
@@ -72,10 +72,9 @@ describe("The Solr indexer", function () {
             )
         });
     });
-
     describe("clients connected to an filled index", function () {
         beforeEach(function () {
-            runs(helper.commitFixtures(solr, ['fixture01', 'fixture02']))
+            runs(helper.commitFixtures(solr, ['push01', 'push02']))
             waitsFor(helper.fixtureOk);
         });
 
@@ -110,6 +109,44 @@ describe("The Solr indexer", function () {
                     done();
                 });
             });
+        });
+    });
+    describe("clients with data updates", function() {
+        beforeEach(function () {
+            runs(helper.commitFixtures(solr, ['push01', 'push02']))
+            waitsFor(helper.fixtureOk);
+        });
+
+        it("can extend existing data", function(done) {
+            var fixture;
+            async.series([
+                function (cb) {
+                    helper.loadFixture('fork01', function (data) {
+                        expect(data).toBeDefined();
+                        fixture = data;
+                        cb();
+                    })(1);
+                },
+                function (cb) {
+                    solr.findRepositoryById(17153958, function(err, repo) {
+                        expect(repo.hasOwnProperty('forks_url')).toBeFalsy();
+                        expect(repo.hasOwnProperty('owner_email')).toBeTruthy();
+                        cb(err);
+                    });
+                },
+                function(cb) {
+                    solr.addRepository(fixture.repository, cb)
+                },
+                function (cb) {
+                    solr.findRepositoryById(17153958, function(err, repo) {
+                        expect(repo.hasOwnProperty('forks_url')).toBeTruthy();
+                        expect(repo.hasOwnProperty('owner_email')).toBeTruthy();
+                        cb(err);
+                    });
+                }
+            ],
+                done.bind(this)
+            );
         });
     });
 });

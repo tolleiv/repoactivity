@@ -49,7 +49,7 @@
                 <tokenizer class="solr.StandardTokenizerFactory"/>
                 <filter class="solr.StopFilterFactory"
                         ignoreCase="true"
-                        words="lang/stopwords_en.txt"
+                        words="stopwords.txt"
                         />
                 <filter class="solr.LowerCaseFilterFactory"/>
                 <filter class="solr.EnglishPossessiveFilterFactory"/>
@@ -61,7 +61,7 @@
                 <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
                 <filter class="solr.StopFilterFactory"
                         ignoreCase="true"
-                        words="lang/stopwords_en.txt"
+                        words="stopwords.txt"
                         />
                 <filter class="solr.LowerCaseFilterFactory"/>
                 <filter class="solr.EnglishPossessiveFilterFactory"/>
@@ -86,19 +86,19 @@
         <field name="forks" type="long" indexed="true" stored="true" multiValued="false"/>
         <field name="fork" type="string" indexed="true" stored="true" multiValued="false"/>
         <field name="size" type="long" indexed="true" stored="true" multiValued="false"/>
-        <field name="owner_email" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="owner_name" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="author_email" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="author_name" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="author_username" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="committer_email" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="committer_name" type="text_en" indexed="true" stored="true" multiValued="false"/>
-        <field name="committer_username" type="text_en" indexed="true" stored="true" multiValued="false"/>
         <field name="open_issues" type="long" indexed="true" stored="true" multiValued="false"/>
         <field name="language" type="string" indexed="true" stored="true" multiValued="false"/>
         <field name="repository_id" type="string" indexed="true" stored="true" required="false"/>
 
         <field name="_version_" type="long" indexed="true" stored="true"/>
+
+        <dynamicField name="*_email" type="text_en" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_name" type="text_en" indexed="faöse" stored="true" multiValued="false"/>
+        <dynamicField name="*_username" type="text_en" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_url" type="string" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_id" type="string" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_count" type="long" indexed="false" stored="true" multiValued="false"/>
+
     </fields>
 
     <!-- field to use to determine and enforce document uniqueness. -->
@@ -110,4 +110,3 @@
     <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
     <solrQueryParser defaultOperator="OR"/>
 </schema>
-

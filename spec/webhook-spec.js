@@ -6,7 +6,7 @@ describe("The webhook API", function () {
     var indexer = new events.EventEmitter();
 
     beforeEach(function () {
-        runs(helper.loadFixture('fixture01', function (data) {
+        runs(helper.loadFixture('push01', function (data) {
             fixture = data;
         }));
         waitsFor(helper.fixtureOk);
