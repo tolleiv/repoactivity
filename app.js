@@ -1,25 +1,19 @@
-var express = require('express')
-
-var app = express();
-exports.app = app;
-
-app.configure('development', function () {
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
-app.configure('production', function () {
-    app.use(express.errorHandler());
-});
-
-//app.use(express.bodyParser());
-app.use(express.urlencoded());
-app.use(express.json());
-app.use(express.methodOverride());
-app.use(app.router);
-app.set('indexer', { emit: function() {}})
-
-require('./routes/webhook')(app)
-
-if (__filename == process.argv[1]) {
-    app.listen(3000);
+var cluster = require('cluster');
+if (cluster.isMaster) {
+    var cpuCount = require('os').cpus().length;
+    for (var i = 0; i < cpuCount; i += 1) {
+        cluster.fork();
+    }
+    cluster.on('exit', function(worker) {
+        cluster.fork();
+    });
+} else {
+    var http = require('http');
+    var app = require("./lib/main.js").app;
+    server = http.createServer(app);
+    server.listen(3000);
 }
+
+
+
+

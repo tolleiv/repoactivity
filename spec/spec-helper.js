@@ -47,7 +47,7 @@ exports.assert = {
 
 
 var startServer = function (env, indexer) {
-    app = require("../app.js").app;
+    app = require("../lib/main.js").app;
     app.set('env', env);
     app.set('indexer', indexer)
     server = http.createServer(app);
