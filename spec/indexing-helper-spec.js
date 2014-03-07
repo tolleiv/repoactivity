@@ -31,6 +31,39 @@ describe("The indexer helper", function () {
             var obj2={id: 1, random_url: 'text'}
             expect(mut.filterInput('repository', obj1)).toEqual(obj2)
             done();
+        });
+
+        it("transforms timezoned fields to UTC", function(done) {
+            var objIn = { created_at: "2014-02-24T15:22:10-08:00" }
+            expect(mut.filterInput('repository', objIn))
+                .toEqual({created_at: "2014-02-24T23:22:10.000Z"});
+
+            objIn = { created_at: "2014-02-24T15:22:10+05:00" }
+            expect(mut.filterInput('repository', objIn))
+                .toEqual({created_at: "2014-02-24T10:22:10.000Z"});
+
+            done();
+        });
+
+        it("transforms timestamps fields into Solr compatible ISO 8601", function(done) {
+            var objIn = { created_at: 1393972302 }
+            expect(mut.filterInput('repository', objIn))
+                .toEqual({created_at: "2014-03-04T22:31:42.000Z"});
+            done();
+        });
+
+        it("keeps UTC fields in shape", function(done) {
+            var objIn = { created_at: "2014-03-04T22:31:42Z" }
+            expect(mut.filterInput('repository', objIn))
+                .toEqual({created_at: "2014-03-04T22:31:42.000Z"});
+            done();
+        });
+
+        it("uses 'now' as default if parsing fails", function(done) {
+            var objIn = { created_at: "not parsable" }
+            expect(mut.filterInput('repository', objIn).hasOwnProperty('created_at'))
+                .toBeTruthy();
+            done();
         })
     });
 
