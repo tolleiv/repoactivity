@@ -17,7 +17,8 @@ res/jetty*
 res/solr-*
 solr-*
 
-res/solrdata/*/data/*
+res/solrdata/*
 
+vagrant
 npm-debug.log
 node_modules
