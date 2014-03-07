@@ -69,7 +69,7 @@ describe("The Solr indexer", function () {
                 }
             ],
                 done.bind(this)
-            )
+            );
         });
     });
     describe("clients connected to an filled index", function () {

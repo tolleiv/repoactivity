@@ -96,8 +96,10 @@
         <dynamicField name="*_name" type="text_en" indexed="faöse" stored="true" multiValued="false"/>
         <dynamicField name="*_username" type="text_en" indexed="false" stored="true" multiValued="false"/>
         <dynamicField name="*_url" type="string" indexed="false" stored="true" multiValued="false"/>
-        <dynamicField name="*_id" type="string" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_id" type="string" indexed="true" stored="true" multiValued="false"/>
         <dynamicField name="*_count" type="long" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_date" type="date" indexed="false" stored="true" multiValued="false"/>
+        <dynamicField name="*_at" type="date" indexed="false" stored="true" multiValued="false"/>
 
     </fields>
 
