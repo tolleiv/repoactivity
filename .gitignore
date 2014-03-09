@@ -12,10 +12,10 @@ logs
 results
 
 .idea
-
+res/serversetup/*
 res/jetty*
 res/solr-*
-solr-*
+solr-*/
 
 res/solrdata/*
 
