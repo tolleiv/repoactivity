@@ -8,7 +8,8 @@ module.exports = function (app) {
     app.get("/app-status", function(req, res) {
         var solr = require('../lib/solr')(process.env.NODE_ENV || 'development')
         solr.ping(function (err, doc) {
-            res.send(err ? 500 : 200);
+            var status = ( err ? ":( " : ":) ")  + (process.env.NODE_ENV || 'development');
+            res.send(err ? 500 : 200, status);
         });
     });
 };

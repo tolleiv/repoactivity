@@ -12,7 +12,7 @@ exports.req = {
     post: function (path, data, callback) {
         return request.post({
             url: "http://127.0.0.1:3001" + path,
-            json: data
+            json: {payload: JSON.stringify(data) }
         }, callback);
     },
 
