@@ -83,8 +83,7 @@ exports.commitFixtures = function(solr, list) {
                     expect(err).toBeNull();
                     fixturesOk++;
                 });
-                data.commits['0'].repository_id = data.repository.id;
-                solr.addCommit(data.commits['0'], function(err) {
+                solr.addCommit(data.commits['0'], data.repository.id, function(err) {
                     expect(err).toBeNull();
                     fixturesOk++;
                 });

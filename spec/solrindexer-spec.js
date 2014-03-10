@@ -41,11 +41,12 @@ describe("The Solr indexer", function () {
         });
         it("can index commits", function (done) {
             async.series([
-                solr.addCommit.bind(this, fixture.commits['0']),
+                solr.addCommit.bind(this, fixture.commits['0'], 9000),
                 function (cb) {
                     solr.findCommitById(fixture.commits['0'].id, function (err, doc) {
                         expect(err).toBeNull();
                         expect(doc).not.toEqual(jasmine.objectContaining(fixture.repository));
+                        expect(doc.repository_id).toEqual('9000');
                         cb();
                     });
                 }
@@ -55,7 +56,7 @@ describe("The Solr indexer", function () {
         });
         it("will index flat objects", function (done) {
             async.series([
-                solr.addCommit.bind(this, fixture.commits['0']),
+                solr.addCommit.bind(this, fixture.commits['0'], 9000),
                 function (cb) {
                     solr.findCommitById(fixture.commits['0'].id, function (err, doc) {
                         expect(err).toBeNull();
