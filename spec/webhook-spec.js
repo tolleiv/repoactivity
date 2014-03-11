@@ -1,5 +1,6 @@
 var helper = require('./spec-helper');
 var events = require('events');
+var using = helper.using;
 
 describe("The webhook API", function () {
     var fixture, request = helper.req;
@@ -16,28 +17,32 @@ describe("The webhook API", function () {
     afterEach(function() {
         runs(helper.stop);
     });
+    using("data method", ["form", "json"], function(method) {
+        describe("using " +method, function() {
 
-    it("can retrieve JSON", function (done) {
-        request.post("/payload", {demo: 'tolleiv'}, helper.req.httpOk(done));
-    });
-
-    it("emits all commits for indexing", function (done) {
-        indexer.on('commit', function (data, repo) {
-            expect(data).toBeDefined();
-            expect(data.author).toBeDefined();
-            expect(data.message).toBeDefined();
-            expect(typeof repo).toBe('number');
-            done();
+        it("can retrieve requests" , function (done) {
+            request.post("/payload", {demo: 'tolleiv'}, helper.req.httpOk(done), method);
         });
-        request.post("/payload", fixture, helper.req.httpOk());
+        it("emits all commits for indexing", function (done) {
+            indexer.on('commit', function (data, repo) {
+                expect(data).toBeDefined();
+                expect(data.author).toBeDefined();
+                expect(data.message).toBeDefined();
+                expect(typeof repo).toBe('number');
+                done();
+            });
+            request.post("/payload", fixture, helper.req.httpOk(), method);
+        });
+        it("emits contained repository information for indexing", function(done) {
+            indexer.on('repository', function (data) {
+                expect(data.id).toBeDefined();
+                expect(data.url).not.toBeNull();
+                done();
+            });
+            request.post("/payload", fixture, helper.req.httpOk(), method);
+        });
+
+        })
     });
 
-    it("emits contained repository information for indexing", function(done) {
-        indexer.on('repository', function (data) {
-            expect(data.id).toBeDefined();
-            expect(data.url).not.toBeNull();
-            done();
-        });
-        request.post("/payload", fixture, helper.req.httpOk());
-    });
 });

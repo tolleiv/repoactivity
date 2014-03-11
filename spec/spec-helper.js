@@ -9,11 +9,14 @@ exports.req = {
     get: function (path, callback) {
         return request("http://127.0.0.1:3001" + path, callback);
     },
-    post: function (path, data, callback) {
-        return request.post({
-            url: "http://127.0.0.1:3001" + path,
-            json: {payload: JSON.stringify(data) }
-        }, callback);
+    post: function (path, data, callback, method) {
+        var options = {url: "http://127.0.0.1:3001" + path}
+        if (method=='form') {
+            options.form = {payload: JSON.stringify(data) }
+        } else {
+            options.json = data;
+        }
+        return request.post(options, callback);
     },
 
     httpOk: function(cb) {
@@ -122,3 +125,14 @@ exports.isStarted = function () {
 exports.stop = function (cb) {
     server.close(cb);
 };
+
+// Data provider code - see: https://github.com/jphpsf/jasmine-data-provider
+exports.using = function (name, values, func) {
+    for (var i = 0, count = values.length; i < count; i++) {
+        if (Object.prototype.toString.call(values[i]) !== '[object Array]') {
+            values[i] = [values[i]];
+        }
+        func.apply(this, values[i]);
+       // jasmine.currentEnv_.currentSpec.description += ' (with "' + name + '" using ' + values[i].join(', ') + ')';
+    }
+}
