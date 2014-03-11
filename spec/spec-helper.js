@@ -4,7 +4,7 @@ var assert = require('assert');
 var fs = require('fs');
 
 
-var server, app, loadFixture, started = false, fixturesOk = 0, fixtureReq=0, indexCleared=false;
+var server, app, loadFixture, started = false, fixturesOk = 0, fixtureReq = 0, indexCleared = false;
 exports.req = {
     get: function (path, callback) {
         return request("http://127.0.0.1:3001" + path, callback);
@@ -19,8 +19,8 @@ exports.req = {
         return request.post(options, callback);
     },
 
-    httpOk: function(cb) {
-        return this.respondsPositive(function() {
+    httpOk: function (cb) {
+        return this.respondsPositive(function () {
             cb && cb();
         })
     },
@@ -43,7 +43,7 @@ exports.req = {
 };
 
 exports.assert = {
-    nullError: function(err) {
+    nullError: function (err) {
         expect(err).toBeNull();
     }
 }
@@ -76,17 +76,17 @@ exports.loadFixture = loadFixture = function (name, cb) {
         });
     }
 };
-exports.commitFixtures = function(solr, list) {
+exports.commitFixtures = function (solr, list) {
     return function () {
         fixturesOk = 0;
-        fixtureReq = 3*list.length;
-        list.forEach(function(entry) {
-            loadFixture(entry, function(data) {
-                solr.addRepository(data.repository, function(err) {
+        fixtureReq = 3 * list.length;
+        list.forEach(function (entry) {
+            loadFixture(entry, function (data) {
+                solr.addRepository(data.repository, function (err) {
                     expect(err).toBeNull();
                     fixturesOk++;
                 });
-                solr.addCommit(data.commits['0'], data.repository.id, function(err) {
+                solr.addCommit(data.commits['0'], data.repository.id, function (err) {
                     expect(err).toBeNull();
                     fixturesOk++;
                 });
@@ -99,15 +99,15 @@ exports.fixtureOk = function () {
     return fixturesOk == fixtureReq;
 };
 
-exports.clearIndex = function(solr) {
-    return function() {
-        indexCleared=false;
-        solr.clearAll(function() {
-            indexCleared=true;
+exports.clearIndex = function (solr) {
+    return function () {
+        indexCleared = false;
+        solr.clearAll(function () {
+            indexCleared = true;
         });
     }
 };
-exports.indexCleared = function() {
+exports.indexCleared = function () {
     return indexCleared;
 }
 
