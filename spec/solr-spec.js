@@ -2,7 +2,7 @@ var helper = require('./spec-helper');
 var async = require('async');
 var solr = require('../lib/solr')(process.env.TRAVIS_BUILD_ID ? 'travis' : 'test')
 
-describe("The Solr indexer", function () {
+describe("The Solr client", function () {
 
     afterEach(function () {
         runs(helper.clearIndex(solr));
