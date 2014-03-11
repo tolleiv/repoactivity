@@ -12,6 +12,7 @@
         "request": "> 0.0.1",
         "jasmine-node":  ">= 0.0.1",
         "asset": "> 0.0.1",
-        "async": ">=0.0.3"
+        "async": ">=0.0.3",
+        "proxyquire": "> 0.0.1"
     }
 }
