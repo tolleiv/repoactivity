@@ -8,11 +8,17 @@
     },
     "dependencies":  {
         "solr-client":"https://github.com/tolleiv/solr-node-client/tarball/master",
-        "express": "3.x",
+        "express": "4.x",
+        "serve-favicon": "*",
+        "body-parser": "*",
+        "method-override": "*",
+        "morgan": "*",
+        "errorhandler": "*",
         "request": "> 0.0.1",
         "jasmine-node":  ">= 0.0.1",
         "asset": "> 0.0.1",
         "async": ">=0.0.3",
-        "proxyquire": "> 0.0.1"
+        "proxyquire": "> 0.0.1",
+        "jade": "1.3.x"
     }
 }
